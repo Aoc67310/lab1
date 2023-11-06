@@ -1,6 +1,7 @@
 import java.awt.*;
 
-public class Car{
+public abstract class Car{
+
     public int nrDoors; // Number of doors on the car
 
     public double enginePower; // Engine power of the car
@@ -11,9 +12,10 @@ public class Car{
 
     public String modelName; // The car model name
 
-    public Car(nrDoors, enginePower, color, modelName) {
+    // constructor
+    public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors =  nrDoors;
-        this.enginePower = engginePower;
+        this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
         this.stopEngine();
@@ -46,6 +48,21 @@ public class Car{
         currentSpeed = 0;
     }
 
+    abstract double speedFactor();
+    abstract void incrementSpeed(double amount);
+    abstract void decrementSpeed(double amount);
+
+    // TODO fix this method according to lab pm
+    public void gas(double amount){
+        incrementSpeed(amount);
+    }
+
+    // TODO fix this method according to lab pm
+    public void brake(double amount){
+        decrementSpeed(amount);
+    }
 
 
 }
+
+
