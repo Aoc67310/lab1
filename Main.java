@@ -7,6 +7,8 @@ class Main{
         Car newcar2 = new Volvo240();
         newcar2.turnRight();
         System.out.println(newcar2.direction);
+        newcar1.move();
+        newcar1.
 
         System.out.println("I am a Geek");
     }

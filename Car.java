@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.List;
 
 public abstract class Car implements Movable{
 
@@ -13,8 +12,14 @@ public abstract class Car implements Movable{
 
     public String modelName; // The car model name
 
+    public double xkoordinat;
+
+    public double ykoordinat;
 
 
+    public Point(xkoordinat, ykoordinat) position;
+
+    public int direction;
     // constructor
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors =  nrDoors;
@@ -22,6 +27,9 @@ public abstract class Car implements Movable{
         this.color = color;
         this.modelName = modelName;
         this.stopEngine();
+        this.xkoordinat = 0;
+        this.ykoordinat = 0;
+        this.direction = 0;
     }
 
     public int getNrDoors(){
@@ -52,12 +60,8 @@ public abstract class Car implements Movable{
     }
 
     abstract double speedFactor();
-
     abstract void incrementSpeed(double amount);
-
     abstract void decrementSpeed(double amount);
-
-
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
@@ -68,8 +72,36 @@ public abstract class Car implements Movable{
     public void brake(double amount){
         decrementSpeed(amount);
     }
-
+    @Override
+    public void move(){
+        double speed = getCurrentSpeed();
+        switch (direction){
+            case 0:
+                xkoordinat += speed;
+                break;
+            case 90:
+                ykoordinat += speed;
+                break;
+            case 180:
+                xkoordinat -= speed;
+                break;
+            case 270:
+                ykoordinat -= speed;
+                break;
+        }
+    }
+    @Override
+    public void turnRight() {
+        direction = (direction + 90) % 360;
+    }
+    @Override
+    public void turnLeft(){
+        direction = (direction -90) % 360;
+    }
 
 }
+
+
+
 
 

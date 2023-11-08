@@ -1,12 +1,10 @@
 import java.awt.*;
 
 
-public class Volvo240 extends Car implements Movable {
+public class Volvo240 extends Car{
     private final static double trimFactor = 1.25;
 
-    private String direction;
 
-    private Point position;
     
     public Volvo240(){
         super(4, 100, Color.red, "Volvo240");
@@ -24,43 +22,6 @@ public class Volvo240 extends Car implements Movable {
     @Override
     public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-    @Override
-    public void move() {
-        if (direction.equals("North")) {
-            position.move();
-        } else if (direction.equals("West")) {
-            direction = "South";
-        } else if (direction.equals("South")) {
-            direction = "East";
-        } else if (direction.equals("East")) {
-            direction = "North";
-        }
-    }
-    @Override
-    public void turnLeft() {
-        if (direction.equals("North")) {
-            direction = "West";
-        } else if (direction.equals("West")) {
-            direction = "South";
-        } else if (direction.equals("South")) {
-            direction = "East";
-        } else if (direction.equals("East")) {
-            direction = "North";
-        }
-    }
-    @Override
-    public void turnRight() {
-        if (direction.equals("North")) {
-            direction = "East";
-        } else if (direction.equals("East")) {
-            direction = "South";
-        } else if (direction.equals("South")) {
-            direction = "West";
-        } else if (direction.equals("West")) {
-            direction = "North";
-        }
-
     }
 
 }
