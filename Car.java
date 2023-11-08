@@ -15,11 +15,9 @@ public abstract class Car implements Movable{
     public double xkoordinat;
 
     public double ykoordinat;
-
-
-    public Point(xkoordinat, ykoordinat) position;
-
     public int direction;
+    public int getNrDoors;
+
     // constructor
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors =  nrDoors;
@@ -39,8 +37,11 @@ public abstract class Car implements Movable{
         return enginePower;
     }
 
-    public double getCurrentSpeed(){
-        return currentSpeed;
+    public double getCurrentSpeed() {
+        if (0 < currentSpeed && currentSpeed < enginePower) {
+            return currentSpeed;
+        }
+        return 0;
     }
 
     public Color getColor(){
