@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.util.List;
 
-public abstract class Car{
+public abstract class Car implements Movable{
 
     public int nrDoors; // Number of doors on the car
 
@@ -11,6 +12,8 @@ public abstract class Car{
     public Color color; // Color of the car
 
     public String modelName; // The car model name
+
+
 
     // constructor
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
@@ -49,8 +52,12 @@ public abstract class Car{
     }
 
     abstract double speedFactor();
+
     abstract void incrementSpeed(double amount);
+
     abstract void decrementSpeed(double amount);
+
+
 
     // TODO fix this method according to lab pm
     public void gas(double amount){

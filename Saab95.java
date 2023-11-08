@@ -1,8 +1,10 @@
 import java.awt.*;
 
-public class Saab95 extends Car{
+public class Saab95 extends Car implements Movable{
 
     private boolean turboOn;
+
+    private String direction;
 
     public Saab95(){
         super( 2, 125, Color.red, "Saab95");
@@ -33,5 +35,19 @@ public class Saab95 extends Car{
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
+    @Override
+    public void move() {
+
+    }
+
+    @Override
+    public void turnLeft() {
+
+    }
+
+    @Override
+    public void turnRight() {
+
+    }
 }
 
