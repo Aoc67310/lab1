@@ -16,7 +16,7 @@ public abstract class Car implements Movable{
 
     public double ykoordinat;
     public int direction;
-    public int getNrDoors;
+
 
     // constructor
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
@@ -92,12 +92,10 @@ public abstract class Car implements Movable{
         }
     }
     @Override
-    public void turnRight() {
-        direction = (direction + 90) % 360;
-    }
+    public void turnRight() {direction = (direction + 90) % 360;}
     @Override
     public void turnLeft(){
-        direction = (direction -90) % 360;
+        direction = (direction - 90) % 360;
     }
 
 }
