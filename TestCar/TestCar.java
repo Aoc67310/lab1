@@ -52,23 +52,27 @@ public class TestCar{
 
     @Test
     public void TestMove(){
+        // Moving in a circle
         double beforecordx = saab.xkoordinat;
         double beforecordy = saab.ykoordinat;
         saab.move();
         assertEquals(saab.xkoordinat, beforecordx + saab.currentSpeed, 0.0);
         assertEquals(saab.ykoordinat, beforecordy, 0.0);
+
         beforecordx = saab.xkoordinat;
         beforecordy = saab.ykoordinat;
         saab.direction = 90;
         saab.move();
         assertEquals(saab.ykoordinat, beforecordy + saab.currentSpeed, 0.0);
         assertEquals(saab.xkoordinat, beforecordx, 0.0);
+
         beforecordx = saab.xkoordinat;
         beforecordy = saab.ykoordinat;
         saab.direction = 180;
         saab.move();
         assertEquals(saab.xkoordinat, beforecordx - saab.currentSpeed, 0.0);
         assertEquals(saab.ykoordinat, beforecordy, 0.0);
+
         beforecordx = saab.xkoordinat;
         beforecordy = saab.ykoordinat;
         saab.direction = 270;
@@ -91,6 +95,39 @@ public class TestCar{
         assertEquals(saab.direction, (beforedirection - 90) % 360);
     }
 
+    @Test
+    public void TestGas() {
+
+        // currentSpeed is over enginePower after gas()
+        saab.startEngine();
+        double beforespeed = saab.currentSpeed;
+        saab.gas(200);
+        assertEquals(saab.currentSpeed, beforespeed, 0.0);
+
+        // Value inside the given index
+        saab.currentSpeed = 50;
+        beforespeed = saab.currentSpeed;
+        saab.gas(0.5);
+        assertEquals(saab.currentSpeed, beforespeed + 0.5, 0.0);
+
+    }
+
+    @Test
+    public void TestBreak() {
+        // out of index
+        saab.startEngine();
+        double beforespeed = saab.currentSpeed;
+        saab.brake(200);
+        assertEquals(saab.currentSpeed, beforespeed, 0.0);
+
+        // Value inside the given index
+        saab.currentSpeed = 50;
+        beforespeed = saab.currentSpeed;
+        saab.brake(0.5);
+        assertEquals(saab.currentSpeed, beforespeed -0.5, 0.0);
+    }
+
+
     //Volvo240
     @Test
     public void TestVolvo240SpeedFactor() {
@@ -103,9 +140,16 @@ public class TestCar{
 
     @Test
     public void TestVolvo240DecrementSpeed(){
+        // when currentSpeed is 0
         double beforespeed = volvo.currentSpeed;
         volvo.decrementSpeed(1.0);
-        assertEquals(volvo.currentSpeed, Math.max(beforespeed - volvo.speedFactor() * 1, 0), 0.0);
+        assertEquals(volvo.currentSpeed, 0, 0.0);
+
+        // when the speed will be higher than 0 after the decrement
+        volvo.currentSpeed = 50;
+        beforespeed = volvo.currentSpeed;
+        volvo.decrementSpeed(1);
+        assertEquals(true, Objects.equals(volvo.currentSpeed, beforespeed - volvo.speedFactor() * 1));
     }
 
     //Saab95
@@ -146,9 +190,18 @@ public class TestCar{
 
     @Test
     public void TestSaab95decrementSpeed() {
+        // when saab.currentSpeed = 0
         double beforespeed = saab.currentSpeed;
         saab.decrementSpeed(1.0);
-        assertEquals(saab.currentSpeed, beforespeed - saab.speedFactor() * 1, 0.0);
+        assertEquals(saab.currentSpeed, 0, 0.0);
+
+        // when the speed will be higher than 0 after the decrement
+        saab.currentSpeed = 100;
+        beforespeed = saab.currentSpeed;
+        saab.decrementSpeed(1);
+        assertTrue(Objects.equals(saab.currentSpeed, beforespeed - saab.speedFactor() * 1 ));
+
     }
+
 }
 

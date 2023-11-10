@@ -28,7 +28,7 @@ public abstract class Car implements Movable{
         this.xkoordinat = 0;
         this.ykoordinat = 0;
         this.direction = 0;
-    }
+    } // constructor
 
     public int getNrDoors(){
         return nrDoors;
@@ -61,18 +61,23 @@ public abstract class Car implements Movable{
     }
 
     abstract double speedFactor();
-    abstract void incrementSpeed(double amount);
-    abstract void decrementSpeed(double amount);
+    public void incrementSpeed(double amount) {currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);}
+    public void decrementSpeed(double amount) {currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);}
 
     // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
+    public void gas(double amount) {
+        if (amount <= 1.0 && amount >= 0.0) {
+            currentSpeed = Math.min(currentSpeed + amount, enginePower);
+        }
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
-        decrementSpeed(amount);
+        if (amount >= 0  && amount <= 1) {
+            currentSpeed = Math.max(currentSpeed - amount, 0);
+        }
     }
+
     @Override
     public void move(){
         double speed = getCurrentSpeed();
@@ -91,6 +96,7 @@ public abstract class Car implements Movable{
                 break;
         }
     }
+
     @Override
     public void turnRight() {direction = (direction + 90) % 360;}
     @Override
