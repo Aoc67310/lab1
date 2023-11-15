@@ -10,7 +10,6 @@ public class TestCar{
 
     Saab95 saab = new Saab95();
     Volvo240 volvo = new Volvo240();
-
     Scania scania = new Scania();
     // Car.java
 

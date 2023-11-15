@@ -11,12 +11,11 @@ public abstract class Vehicle implements Movable{
 
     protected String modelName; // The car model name
 
-    protected double xkoordinat;
+    public double x;
 
     protected double ykoordinat;
     protected int direction;
 
-    protected String Vehicletype;
 
     public Vehicle(int nrDoors ,double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
