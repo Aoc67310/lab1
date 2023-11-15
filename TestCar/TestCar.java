@@ -8,11 +8,14 @@ import static org.junit.Assert.*;
 
 public class TestCar{
 
-    Car saab = new Saab95();
-    Car volvo = new Volvo240();
+    Saab95 saab = new Saab95();
+    Volvo240 volvo = new Volvo240();
 
+    Scania scania = new Scania();
     // Car.java
 
+
+    // Tests for Car
     @Test
     public void TestGetNrOfDoors() {
         assertEquals(2, saab.getNrDoors()); }
@@ -96,7 +99,7 @@ public class TestCar{
     }
 
     @Test
-    public void TestGas() {
+    public void TestGasCar() {
 
         // currentSpeed is over enginePower after gas()
         saab.startEngine();
@@ -108,7 +111,7 @@ public class TestCar{
         saab.currentSpeed = 50;
         beforespeed = saab.currentSpeed;
         saab.gas(0.5);
-        assertEquals(saab.currentSpeed, beforespeed + 0.5, 0.0);
+        assertEquals(saab.currentSpeed, beforespeed + 0.5 * saab.speedFactor(), 0.0);
 
     }
 
@@ -124,7 +127,7 @@ public class TestCar{
         saab.currentSpeed = 50;
         beforespeed = saab.currentSpeed;
         saab.brake(0.5);
-        assertEquals(saab.currentSpeed, beforespeed -0.5, 0.0);
+        assertEquals(saab.currentSpeed, beforespeed - saab.speedFactor()* 0.5, 0.0);
     }
 
 
@@ -132,32 +135,12 @@ public class TestCar{
     @Test
     public void TestVolvo240SpeedFactor() {
         assertEquals(volvo.speedFactor(), volvo.enginePower * 0.01 * 1.25, 0.0); }
-    @Test
-    public void TestVolvo240IncrementSpeed() {
-        double beforespeed = volvo.currentSpeed;
-        volvo.incrementSpeed(1.0);
-        assertEquals(volvo.currentSpeed, Math.min(beforespeed + volvo.speedFactor() * volvo.currentSpeed, volvo.speedFactor()), 0.0); }
-
-    @Test
-    public void TestVolvo240DecrementSpeed(){
-        // when currentSpeed is 0
-        double beforespeed = volvo.currentSpeed;
-        volvo.decrementSpeed(1.0);
-        assertEquals(volvo.currentSpeed, 0, 0.0);
-
-        // when the speed will be higher than 0 after the decrement
-        volvo.currentSpeed = 50;
-        beforespeed = volvo.currentSpeed;
-        volvo.decrementSpeed(1);
-        assertEquals(true, Objects.equals(volvo.currentSpeed, beforespeed - volvo.speedFactor() * 1));
-    }
 
     //Saab95
     @Test
     public void TestSaab95setTurboOn(){
-        Saab95 Saab = (Saab95) saab;
-        Saab.setTurboOn();
-        assertTrue(Saab.turboOn);
+        saab.setTurboOn();
+        assertTrue(saab.turboOn);
     }
 
     @Test
@@ -181,26 +164,49 @@ public class TestCar{
         assertEquals(Saab.speedFactor(), Saab.enginePower * 0.01 * 1.3, 0.0);
     }
 
+
+    // test Truck
+
     @Test
-    public void TestSaab95incrementSpeed() {
-        double beforespeed = saab.currentSpeed;
-        saab.incrementSpeed(1.0);
-        assertEquals(saab.currentSpeed, beforespeed + saab.speedFactor() * 1, 0.0);
+    public void TestgetCargoAngle() {
+        assertEquals(scania.getCargoAngle(), 0.0, 0.0);
     }
 
     @Test
-    public void TestSaab95decrementSpeed() {
-        // when saab.currentSpeed = 0
-        double beforespeed = saab.currentSpeed;
-        saab.decrementSpeed(1.0);
-        assertEquals(saab.currentSpeed, 0, 0.0);
+    public void TestincreaseCargoAngle() {
+        double beforeangle = scania.getCargoAngle();
+        double amount = 2;
+        scania.increaseCargoAngle(amount);
+        assertEquals(scania.getCargoAngle(), beforeangle + amount, 0.0);
+        beforeangle = scania.getCargoAngle();
+        scania.increaseCargoAngle(70);
+        assertEquals(scania.getCargoAngle(), beforeangle, 0.0);
+    }
 
-        // when the speed will be higher than 0 after the decrement
-        saab.currentSpeed = 100;
-        beforespeed = saab.currentSpeed;
-        saab.decrementSpeed(1);
-        assertTrue(Objects.equals(saab.currentSpeed, beforespeed - saab.speedFactor() * 1 ));
+    @Test
+    public void  TestdecreaseCargoAngle() {
+        double beforeangle = scania.getCargoAngle();
+        double amount = 2;
+        scania.increaseCargoAngle(amount);
+        scania.decreaseCargoAngle(amount);
+        assertEquals(scania.getCargoAngle(), beforeangle, 0.0);
 
+        beforeangle = scania.getCargoAngle();
+        scania.decreaseCargoAngle(70);
+       assertEquals(scania.getCargoAngle(), beforeangle, 0.0);
+
+    }
+
+    @Test
+    public void TestGasTruck() {
+        double beforespeed = scania.getCurrentSpeed();
+        scania.gas(1.0);
+        assertEquals(scania.getCurrentSpeed(), beforespeed + 1, 0.0);
+    }
+
+    @Test
+    public void TestSpeedfactor() {
+        assertEquals(scania.speedFactor(), 1, 0.0);
     }
 
 }

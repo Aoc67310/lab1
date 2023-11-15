@@ -12,8 +12,13 @@ class Main{
         newcar1.startEngine();
         System.out.println(newcar1.currentSpeed);
         newcar1.move();
-        newcar1.incrementSpeed(1.0);
+        newcar1.gas(1.0);
         System.out.println(newcar1.currentSpeed);
+        Truck newcar3 = new Scania();
+        System.out.println(newcar3.getEnginePower());
+        CarTransport newtransport = new CarTransport();
+        newtransport.increaseCargoAngle(20);
+        System.out.println(newtransport.getCargoAngle());
 
 
         System.out.println("I am a Geek");
