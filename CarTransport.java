@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Objects;
 import java.util.Stack;
 import java.lang.Math;
 
@@ -51,10 +50,6 @@ public class CarTransport extends Truck {
     @Override
     public void move(){
         double speed = getCurrentSpeed();
-        for (int i = 0; i < stk.size(); i++){
-            stk.get(i).x = x;
-            stk.get(i).y = y;
-        }
         switch (direction){
             case 0:
                 x += speed;
@@ -68,6 +63,10 @@ public class CarTransport extends Truck {
             case 270:
                 y -= speed;
                 break;
+        }
+        for (int i = 0; i < nrOfCars ; i++){
+            stk.get(i).x = x;
+            stk.get(i).y = y;
         }
     }
 

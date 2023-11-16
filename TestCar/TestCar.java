@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.util.Objects;
+import java.util.Stack;
 
 import static java.awt.Color.RED;
 import static org.junit.Assert.*;
@@ -11,8 +12,10 @@ public class TestCar{
     Saab95 saab = new Saab95();
     Volvo240 volvo = new Volvo240();
     Scania scania = new Scania();
-    // Car.java
 
+    CarTransport carTransport = new CarTransport();
+
+    // Car.java
 
     // Tests for Car
     @Test
@@ -206,6 +209,59 @@ public class TestCar{
     @Test
     public void TestSpeedfactor() {
         assertEquals(scania.speedFactor(), 1, 0.0);
+    }
+
+    // test CarTransport
+
+    Volvo240 volvo2 = new Volvo240();
+    @Test
+    public void TestCarTransportgetCargo() {
+        assertSame(carTransport.getCargo().toString(), "[]");
+    }
+
+    @Test
+    public void Testopenandclosecacrgo() {
+        carTransport.openCargo();
+        assertEquals(carTransport.getCargoAngle(), 1, 0);
+        carTransport.closeCargo();
+        assertEquals(carTransport.getCargoAngle(), 0, 0);
+    }
+    @Test
+    public void TestCarTransportgetNrOfCars_load_and_unload(){
+        assertEquals(carTransport.getNrOfCars(), 0, 0);
+        carTransport.openCargo();
+        carTransport.load(volvo2);
+        assertEquals(carTransport.getNrOfCars(), 1 , 0);
+        carTransport.unload();
+        assertEquals(volvo2.x, carTransport.x + 1, 0);
+    }
+
+    @Test
+    public void Testdecrementcargoangleandincrementcargoangle() {
+        carTransport.decreaseCargoAngle(1);
+        carTransport.increaseCargoAngle(1);
+    }
+
+    @Test
+    public void Testmove(){
+        carTransport.openCargo();
+        carTransport.load(volvo2);
+        carTransport.closeCargo();
+        carTransport.gas(1);
+        carTransport.move();
+        assertEquals(volvo2.x, carTransport.x, 0);
+        carTransport.turnRight();
+        carTransport.move();
+        assertEquals(volvo2.y , carTransport.y, 0);
+        carTransport.turnRight();
+        carTransport.move();
+        carTransport.turnRight();
+        carTransport.move();
+        carTransport.brake(1);
+        carTransport.openCargo();
+        carTransport.unload();
+        assertEquals(volvo2.x, carTransport.x + 1, 0);
+        assertEquals(volvo2.y, carTransport.y + 1, 0);
     }
 
 }
