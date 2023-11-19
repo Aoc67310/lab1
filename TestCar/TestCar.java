@@ -7,48 +7,60 @@ import java.util.Stack;
 import static java.awt.Color.RED;
 import static org.junit.Assert.*;
 
-public class TestCar{
+public class TestCar {
 
     Saab95 saab = new Saab95();
+
     Volvo240 volvo = new Volvo240();
+    Volvo240 volvo2 = new Volvo240();
+
     Scania scania = new Scania();
 
     CarTransport carTransport = new CarTransport();
+
+    CarWorkshop Volvoworkshop = new CarWorkshop<>(3);
 
     // Car.java
 
     // Tests for Car
     @Test
     public void TestGetNrOfDoors() {
-        assertEquals(2, saab.getNrDoors()); }
+        assertEquals(2, saab.getNrDoors());
+    }
+
     @Test
-    public void testGetModelName(){
+    public void testGetModelName() {
         assertEquals("Saab95", saab.modelName);
     }
 
     @Test
-    public void TestGetEnginePowerSaab95(){
-        assertEquals(125, saab.getEnginePower(), 0.0);}
+    public void TestGetEnginePowerSaab95() {
+        assertEquals(125, saab.getEnginePower(), 0.0);
+    }
 
     @Test
-    public void TestGetColor(){
-        assertEquals(saab.getColor(), RED);}
+    public void TestGetColor() {
+        assertEquals(saab.getColor(), RED);
+    }
 
     @Test
     public void TestSetColor() {
         saab.setColor(Color.red);
-        assertEquals(Color.red, saab.color);}
+        assertEquals(Color.red, saab.color);
+    }
 
     @Test
     public void TestStartEngine() {
         saab.startEngine();
-        assertEquals(0.1, saab.currentSpeed, 0.0); }
+        assertEquals(0.1, saab.currentSpeed, 0.0);
+    }
 
     @Test
     public void TestGetCurrentSpeed() {
         saab.startEngine();
         assertEquals(saab.getCurrentSpeed(), saab.currentSpeed, 0.0);
     }
+
     @Test
     public void TestStopEngine() {
         saab.stopEngine();
@@ -56,34 +68,34 @@ public class TestCar{
     }
 
     @Test
-    public void TestMove(){
+    public void TestMove() {
         // Moving in a circle
-        double beforecordx = saab.x;
-        double beforecordy = saab.y;
+        double beforecordx = saab.xkoordinat;
+        double beforecordy = saab.ykoordinat;
         saab.move();
-        assertEquals(saab.x, beforecordx + saab.currentSpeed, 0.0);
-        assertEquals(saab.y, beforecordy, 0.0);
+        assertEquals(saab.xkoordinat, beforecordx + saab.currentSpeed, 0.0);
+        assertEquals(saab.ykoordinat, beforecordy, 0.0);
 
-        beforecordx = saab.x;
-        beforecordy = saab.y;
+        beforecordx = saab.xkoordinat;
+        beforecordy = saab.ykoordinat;
         saab.direction = 90;
         saab.move();
-        assertEquals(saab.y, beforecordy + saab.currentSpeed, 0.0);
-        assertEquals(saab.x, beforecordx, 0.0);
+        assertEquals(saab.ykoordinat, beforecordy + saab.currentSpeed, 0.0);
+        assertEquals(saab.xkoordinat, beforecordx, 0.0);
 
-        beforecordx = saab.x;
-        beforecordy = saab.y;
+        beforecordx = saab.xkoordinat;
+        beforecordy = saab.ykoordinat;
         saab.direction = 180;
         saab.move();
-        assertEquals(saab.x, beforecordx - saab.currentSpeed, 0.0);
-        assertEquals(saab.y, beforecordy, 0.0);
+        assertEquals(saab.xkoordinat, beforecordx - saab.currentSpeed, 0.0);
+        assertEquals(saab.ykoordinat, beforecordy, 0.0);
 
-        beforecordx = saab.x;
-        beforecordy = saab.y;
+        beforecordx = saab.xkoordinat;
+        beforecordy = saab.ykoordinat;
         saab.direction = 270;
         saab.move();
-        assertEquals(saab.y, beforecordy - saab.currentSpeed, 0.0);
-        assertEquals(saab.x, beforecordx, 0.0);
+        assertEquals(saab.ykoordinat, beforecordy - saab.currentSpeed, 0.0);
+        assertEquals(saab.xkoordinat, beforecordx, 0.0);
     }
 
     @Test
@@ -94,10 +106,10 @@ public class TestCar{
     }
 
     @Test
-    public void TestTurnLeftVehic() {
-        int beforeDirection = saab.direction;
+    public void TestTurnLeft() {
+        int beforedirection = saab.direction;
         saab.turnLeft();
-        assertEquals(saab.direction, (beforeDirection - 90) % 360);
+        assertEquals(saab.direction, (beforedirection - 90) % 360);
     }
 
     @Test
@@ -114,7 +126,6 @@ public class TestCar{
         beforespeed = saab.currentSpeed;
         saab.gas(0.5);
         assertEquals(saab.currentSpeed, beforespeed + 0.5 * saab.speedFactor(), 0.0);
-
     }
 
     @Test
@@ -129,24 +140,26 @@ public class TestCar{
         saab.currentSpeed = 50;
         beforespeed = saab.currentSpeed;
         saab.brake(0.5);
-        assertEquals(saab.currentSpeed, beforespeed - saab.speedFactor()* 0.5, 0.0);
+        assertEquals(saab.currentSpeed, beforespeed - saab.speedFactor() * 0.5, 0.0);
     }
 
-
     //Volvo240
+
     @Test
     public void TestVolvo240SpeedFactor() {
-        assertEquals(volvo.speedFactor(), volvo.enginePower * 0.01 * 1.25, 0.0); }
+        assertEquals(volvo.speedFactor(), volvo.enginePower * 0.01 * 1.25, 0.0);
+    }
 
     //Saab95
+
     @Test
-    public void TestSaab95setTurboOn(){
+    public void TestSaab95setTurboOn() {
         saab.setTurboOn();
         assertTrue(saab.turboOn);
     }
 
     @Test
-    public  void TestSaab95setTurboOff() {
+    public void TestSaab95setTurboOff() {
         Saab95 Saab = (Saab95) saab;
         Saab.setTurboOff();
         assertFalse(Saab.turboOn);
@@ -165,7 +178,6 @@ public class TestCar{
         Saab.setTurboOn();
         assertEquals(Saab.speedFactor(), Saab.enginePower * 0.01 * 1.3, 0.0);
     }
-
 
     // test Truck
 
@@ -186,7 +198,7 @@ public class TestCar{
     }
 
     @Test
-    public void  TestdecreaseCargoAngle() {
+    public void TestdecreaseCargoAngle() {
         double beforeangle = scania.getCargoAngle();
         double amount = 2;
         scania.increaseCargoAngle(amount);
@@ -195,7 +207,7 @@ public class TestCar{
 
         beforeangle = scania.getCargoAngle();
         scania.decreaseCargoAngle(70);
-       assertEquals(scania.getCargoAngle(), beforeangle, 0.0);
+        assertEquals(scania.getCargoAngle(), beforeangle, 0.0);
 
     }
 
@@ -213,7 +225,6 @@ public class TestCar{
 
     // test CarTransport
 
-    Volvo240 volvo2 = new Volvo240();
     @Test
     public void TestCarTransportgetCargo() {
         assertSame(carTransport.getCargo().toString(), "[]");
@@ -226,14 +237,15 @@ public class TestCar{
         carTransport.closeCargo();
         assertEquals(carTransport.getCargoAngle(), 0, 0);
     }
+
     @Test
-    public void TestCarTransportgetNrOfCars_load_and_unload(){
+    public void TestCarTransportgetNrOfCars_load_and_unload() {
         assertEquals(carTransport.getNrOfCars(), 0, 0);
         carTransport.openCargo();
-        carTransport.load(volvo2);
-        assertEquals(carTransport.getNrOfCars(), 1 , 0);
-        carTransport.unload();
-        assertEquals(volvo2.x, carTransport.x + 1, 0);
+        carTransport.addCar(volvo2);
+        assertEquals(carTransport.getNrOfCars(), 1, 0);
+        carTransport.removeCar();
+        assertEquals(volvo2.xkoordinat, carTransport.xkoordinat + 1, 0);
     }
 
     @Test
@@ -243,25 +255,70 @@ public class TestCar{
     }
 
     @Test
-    public void Testmove(){
+    public void Testmove() {
         carTransport.openCargo();
-        carTransport.load(volvo2);
+        carTransport.addCar(volvo2);
         carTransport.closeCargo();
         carTransport.gas(1);
         carTransport.move();
         assertEquals(volvo2.x, carTransport.x, 0);
         carTransport.turnRight();
         carTransport.move();
-        assertEquals(volvo2.y , carTransport.y, 0);
+        assertEquals(volvo2.ykoordinat, carTransport.ykoordinat, 0);
         carTransport.turnRight();
         carTransport.move();
         carTransport.turnRight();
         carTransport.move();
         carTransport.brake(1);
         carTransport.openCargo();
-        carTransport.unload();
-        assertEquals(volvo2.x, carTransport.x + 1, 0);
-        assertEquals(volvo2.y, carTransport.y + 1, 0);
+        carTransport.removeCar();
+        assertEquals(volvo2.xkoordinat, carTransport.xkoordinat + 1, 0);
+        assertEquals(volvo2.ykoordinat, carTransport.ykoordinat + 1, 0);
+    }
+
+    // Test CarWorkshop
+
+    @Test
+    public void testLoadCar() {
+        Volvo240 volvo1 = new Volvo240();
+        Volvo240 volvo2 = new Volvo240();
+        Volvo240 volvo3 = new Volvo240();
+
+        Volvoworkshop.loadCar(volvo1);
+        Volvoworkshop.loadCar(volvo2);
+        Volvoworkshop.loadCar(volvo3);
+
+        assertEquals(3, Volvoworkshop.getCars().size());
+        assertTrue(Volvoworkshop.getCars().contains(volvo1));
+        assertTrue(Volvoworkshop.getCars().contains(volvo2));
+        assertTrue(Volvoworkshop.getCars().contains(volvo3));
+    }
+
+    @Test
+    public void testmaxcapacity(){
+        Volvo240 volvo1 = new Volvo240();
+        Volvo240 volvo2 = new Volvo240();
+        Volvo240 volvo3 = new Volvo240();
+
+        Volvoworkshop.loadCar(volvo1);
+        Volvoworkshop.loadCar(volvo2);
+        Volvoworkshop.loadCar(volvo3);
+
+        Volvo240 extravolvo = new Volvo240();
+        Volvoworkshop.loadCar(extravolvo);
+
+        assertEquals(3, Volvoworkshop.getCars().size());
+        assertFalse(Volvoworkshop.getCars().contains(extravolvo));
+    }
+
+    @Test
+    public void testunloadCar(){
+        Volvo240 volvo1 = new Volvo240();
+        Volvoworkshop.loadCar(volvo1);
+        Volvoworkshop.unloadCar(volvo1);
+
+        assertEquals(0,Volvoworkshop.getCars().size());
+        assertFalse(Volvoworkshop.getCars().contains(volvo1));
     }
 
 }

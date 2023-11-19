@@ -4,52 +4,20 @@ import java.lang.Math;
 
 public class CarTransport extends Truck {
 
-    // Instance variables
+    protected int nrOfCars;
 
-    private int nrOfCars = 0;
+    protected Stack<Car> carStack = new Stack<>();
 
-    private int maxNrCars = 5;
+    protected CarTransport() {super(2, 400, Color.black, "Cartransport");} //constructor
 
-    private Car[] Cars = new Car[5];
-
-    public Stack<Car> stk = new Stack<Car>();
-
-    // Vehicle pickup method
-
-    public void load(Car car){
-        if (getCurrentSpeed() == 0.0 && getCargoAngle() == 1.0 && car.getCurrentSpeed() == 0.0 && nrOfCars <= maxNrCars) {
-            if (Math.abs(car.getX() - getX()) <= 5 && Math.abs(car.getY() - getY()) <= 5) {
-                stk.push(car);
-                nrOfCars = nrOfCars + 1;
-            }
-        }
-   }
-
-   // Vehicle unload method
-
-   public void unload() {
-       if (getCurrentSpeed() == 0.0 && cargoAngle == 70 ) {
-           stk.get(stk.size() -1 ).x = x + 1;
-           stk.pop().y = y + 1;
-           nrOfCars = nrOfCars - 1;
-
-       }
-   }
-
-   public Stack<Car> getCargo(){
-       return stk;
-   }
-
-   // Constructor
-
-    public CarTransport() {
-       super(2, 400, Color.black, "CarTransport");
-   }
-
-    public int getNrOfCars() {
+    protected int getNrOfCars() {
         return nrOfCars;
     }
 
+
+    public Stack<Car> getCargo(){
+        return carStack;
+    }
     // 1 represents an open cargo gate, 0 represents a closed cargo gate.
     @Override
     public double getCargoAngle(){
@@ -59,17 +27,42 @@ public class CarTransport extends Truck {
     }
 
     public void openCargo(){
-        cargoAngle = 70;
+        if (getCurrentSpeed() == 0) {cargoAngle = 70;}
     }
 
     public void closeCargo(){
         cargoAngle = 0;
     }
 
+    public void addCar(Car car) {
+        if (getCargoAngle() == 1.0) {
+            carStack.push(car);
+            nrOfCars++;
+            System.out.println(car.getModelName() + " added to the car transport.");
+        } else {
+            System.out.println("Open the cargo gate before adding a car.");
+        }
+    }
+
+    public void removeCar() {
+        if (getCargoAngle() == 1.0) {
+            if (!carStack.isEmpty()) {
+                carStack.get(carStack.size() - 1 ).xkoordinat = xkoordinat + 1;
+                carStack.pop().ykoordinat = ykoordinat + 1;
+                nrOfCars--;
+            } else {
+                System.out.println("No cars to remove from the car transport.");
+            }
+        } else {
+            System.out.println("Open the cargo gate before removing a car.");
+        }
+    }
+
     @Override
     public void increaseCargoAngle(double amount){
         System.out.println("You can only open the cargo gate fully with openCargo ");
     }
+
     @Override
     public void  decreaseCargoAngle(double amount){
         System.out.println("Wou can only close the cargo gate fully with closeCargo ");
@@ -85,23 +78,21 @@ public class CarTransport extends Truck {
         double speed = getCurrentSpeed();
         switch (direction){
             case 0:
-                x += speed;
+                xkoordinat += speed;
                 break;
             case 90:
-                y += speed;
+                ykoordinat += speed;
                 break;
             case 180:
-                x -= speed;
+                xkoordinat -= speed;
                 break;
             case 270:
-                y -= speed;
+                ykoordinat -= speed;
                 break;
         }
         for (int i = 0; i < nrOfCars ; i++){
-            stk.get(i).x = x;
-            stk.get(i).y = y;
+            carStack.get(i).xkoordinat = xkoordinat;
+            carStack.get(i).ykoordinat = ykoordinat;
         }
     }
-
-
 }

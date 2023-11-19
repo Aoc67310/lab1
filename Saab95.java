@@ -4,15 +4,16 @@ public class Saab95 extends Car{
 
     public boolean turboOn;
 
+
     public Saab95(){
         super( 2, 125, Color.red, "Saab95");
-	    turboOn = false;
+        turboOn = false;
     }
 
     public void setTurboOn(){turboOn = true;}
 
     public void setTurboOff(){
-	    turboOn = false;
+        turboOn = false;
     }
 
     @Override
