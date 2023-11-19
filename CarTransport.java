@@ -4,11 +4,47 @@ import java.lang.Math;
 
 public class CarTransport extends Truck {
 
-    protected int nrOfCars;
+    // Instance variables
 
-    public Stack<Objects> stk = new Stack<>();
+    private int nrOfCars = 0;
 
-    public CarTransport() {super(2, 400, Color.black, "Cartransport");} //constructor
+    private int maxNrCars = 5;
+
+    private Car[] Cars = new Car[5];
+
+    public Stack<Car> stk = new Stack<Car>();
+
+    // Vehicle pickup method
+
+    public void load(Car car){
+        if (getCurrentSpeed() == 0.0 && getCargoAngle() == 1.0 && car.getCurrentSpeed() == 0.0 && nrOfCars <= maxNrCars) {
+            if (Math.abs(car.getX() - getX()) <= 5 && Math.abs(car.getY() - getY()) <= 5) {
+                stk.push(car);
+                nrOfCars = nrOfCars + 1;
+            }
+        }
+   }
+
+   // Vehicle unload method
+
+   public void unload() {
+       if (getCurrentSpeed() == 0.0 && cargoAngle == 70 ) {
+           stk.get(stk.size() -1 ).x = x + 1;
+           stk.pop().y = y + 1;
+           nrOfCars = nrOfCars - 1;
+
+       }
+   }
+
+   public Stack<Car> getCargo(){
+       return stk;
+   }
+
+   // Constructor
+
+    public CarTransport() {
+       super(2, 400, Color.black, "CarTransport");
+   }
 
     public int getNrOfCars() {
         return nrOfCars;
@@ -28,9 +64,6 @@ public class CarTransport extends Truck {
 
     public void closeCargo(){
         cargoAngle = 0;
-    }
-
-    public void addCar(){
     }
 
     @Override

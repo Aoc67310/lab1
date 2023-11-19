@@ -58,32 +58,32 @@ public class TestCar{
     @Test
     public void TestMove(){
         // Moving in a circle
-        double beforecordx = saab.xkoordinat;
-        double beforecordy = saab.ykoordinat;
+        double beforecordx = saab.x;
+        double beforecordy = saab.y;
         saab.move();
-        assertEquals(saab.xkoordinat, beforecordx + saab.currentSpeed, 0.0);
-        assertEquals(saab.ykoordinat, beforecordy, 0.0);
+        assertEquals(saab.x, beforecordx + saab.currentSpeed, 0.0);
+        assertEquals(saab.y, beforecordy, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.x;
+        beforecordy = saab.y;
         saab.direction = 90;
         saab.move();
-        assertEquals(saab.ykoordinat, beforecordy + saab.currentSpeed, 0.0);
-        assertEquals(saab.xkoordinat, beforecordx, 0.0);
+        assertEquals(saab.y, beforecordy + saab.currentSpeed, 0.0);
+        assertEquals(saab.x, beforecordx, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.x;
+        beforecordy = saab.y;
         saab.direction = 180;
         saab.move();
-        assertEquals(saab.xkoordinat, beforecordx - saab.currentSpeed, 0.0);
-        assertEquals(saab.ykoordinat, beforecordy, 0.0);
+        assertEquals(saab.x, beforecordx - saab.currentSpeed, 0.0);
+        assertEquals(saab.y, beforecordy, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.x;
+        beforecordy = saab.y;
         saab.direction = 270;
         saab.move();
-        assertEquals(saab.ykoordinat, beforecordy - saab.currentSpeed, 0.0);
-        assertEquals(saab.xkoordinat, beforecordx, 0.0);
+        assertEquals(saab.y, beforecordy - saab.currentSpeed, 0.0);
+        assertEquals(saab.x, beforecordx, 0.0);
     }
 
     @Test
@@ -94,10 +94,10 @@ public class TestCar{
     }
 
     @Test
-    public void TestTurnLeft() {
-        int beforedirection = saab.direction;
+    public void TestTurnLeftVehic() {
+        int beforeDirection = saab.direction;
         saab.turnLeft();
-        assertEquals(saab.direction, (beforedirection - 90) % 360);
+        assertEquals(saab.direction, (beforeDirection - 90) % 360);
     }
 
     @Test

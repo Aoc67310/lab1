@@ -13,7 +13,8 @@ public abstract class Vehicle implements Movable{
 
     public double x;
 
-    protected double ykoordinat;
+    protected double y;
+    
     protected int direction;
 
 
@@ -23,8 +24,8 @@ public abstract class Vehicle implements Movable{
         this.color = color;
         this.modelName = modelName;
         this.stopEngine();
-        this.xkoordinat = 0;
-        this.ykoordinat = 0;
+        this.x = 0;
+        this.y = 0;
         this.direction = 0;
     } // constructor
 
@@ -43,6 +44,12 @@ public abstract class Vehicle implements Movable{
         return 0;
     }
 
+    // Getters
+
+    public double getX() { return x;}
+
+    public double getY() { return y;}
+
     public Color getColor(){
         return color;
     }
@@ -58,6 +65,8 @@ public abstract class Vehicle implements Movable{
     public void stopEngine(){
         currentSpeed = 0;
     }
+
+    // Methods
 
     abstract double speedFactor();
     private void incrementSpeed(double amount) {currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);}
@@ -90,16 +99,16 @@ public abstract class Vehicle implements Movable{
         double speed = getCurrentSpeed();
         switch (direction){
             case 0:
-                xkoordinat += speed;
+                x += speed;
                 break;
             case 90:
-                ykoordinat += speed;
+                y += speed;
                 break;
             case 180:
-                xkoordinat -= speed;
+                x -= speed;
                 break;
             case 270:
-                ykoordinat -= speed;
+                y -= speed;
                 break;
         }
     }
