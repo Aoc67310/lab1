@@ -31,6 +31,13 @@ public abstract class Vehicle implements Movable{
         this.direction = 0;
     } // constructor
 
+    public double getX() {
+        return xkoordinat;
+    }
+
+    public double getY() {
+        return ykoordinat;
+    }
 
     public String getModelName() {
         return modelName;
