@@ -2,6 +2,7 @@ import java.awt.*;
 
 public abstract class Vehicle implements Movable{
 
+    public Object getPoint;
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
 
@@ -13,11 +14,9 @@ public abstract class Vehicle implements Movable{
 
     public double x;
 
-    protected double xkoordinat;
-
-    protected double ykoordinat;
-
     protected int direction;
+
+    protected Point point;
 
 
     public Vehicle(int nrDoors ,double enginePower, Color color, String modelName) {
@@ -26,19 +25,13 @@ public abstract class Vehicle implements Movable{
         this.color = color;
         this.modelName = modelName;
         this.stopEngine();
-        this.xkoordinat = 0;
-        this.ykoordinat = 0;
+        this.point = new Point();
         this.direction = 0;
+        this.point = point;
     } // constructor
 
-    public double getX() {
-        return xkoordinat;
-    }
 
-    public double getY() {
-        return ykoordinat;
-    }
-
+    public Point getPoint() {return point; }
     public String getModelName() {
         return modelName;
     }
@@ -105,16 +98,16 @@ public abstract class Vehicle implements Movable{
         double speed = getCurrentSpeed();
         switch (direction){
             case 0:
-                xkoordinat += speed;
+                point.x += speed;
                 break;
             case 90:
-                ykoordinat += speed;
+                point.y += speed;
                 break;
             case 180:
-                xkoordinat -= speed;
+                point.x -= speed;
                 break;
             case 270:
-                ykoordinat -= speed;
+                point.y -= speed;
                 break;
         }
     }

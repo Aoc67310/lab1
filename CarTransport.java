@@ -47,8 +47,8 @@ public class CarTransport extends Truck {
     public void removeCar() {
         if (getCargoAngle() == 1.0) {
             if (!carStack.isEmpty()) {
-                carStack.get(carStack.size() - 1 ).xkoordinat = xkoordinat + 1;
-                carStack.pop().ykoordinat = ykoordinat + 1;
+                carStack.get(carStack.size() - 1 ).point.x = point.x + 1;
+                carStack.pop().point.y = point.y + 1;
                 nrOfCars--;
             } else {
                 System.out.println("No cars to remove from the car transport.");
@@ -78,21 +78,21 @@ public class CarTransport extends Truck {
         double speed = getCurrentSpeed();
         switch (direction){
             case 0:
-                xkoordinat += speed;
+                point.x += speed;
                 break;
             case 90:
-                ykoordinat += speed;
+                point.y += speed;
                 break;
             case 180:
-                xkoordinat -= speed;
+                point.x -= speed;
                 break;
             case 270:
-                ykoordinat -= speed;
+                point.y -= speed;
                 break;
         }
         for (int i = 0; i < nrOfCars ; i++){
-            carStack.get(i).xkoordinat = xkoordinat;
-            carStack.get(i).ykoordinat = ykoordinat;
+            carStack.get(i).point.x = point.x;
+            carStack.get(i).point.y = point.y;
         }
     }
 }

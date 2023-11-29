@@ -70,32 +70,32 @@ public class TestCar {
     @Test
     public void TestMove() {
         // Moving in a circle
-        double beforecordx = saab.xkoordinat;
-        double beforecordy = saab.ykoordinat;
+        double beforecordx = saab.point.x;
+        double beforecordy = saab.point.y;
         saab.move();
-        assertEquals(saab.xkoordinat, beforecordx + saab.currentSpeed, 0.0);
-        assertEquals(saab.ykoordinat, beforecordy, 0.0);
+        assertEquals(saab.point.x, beforecordx + saab.currentSpeed, 0.0);
+        assertEquals(saab.point.y, beforecordy, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.point.x;
+        beforecordy = saab.point.y;
         saab.direction = 90;
         saab.move();
-        assertEquals(saab.ykoordinat, beforecordy + saab.currentSpeed, 0.0);
-        assertEquals(saab.xkoordinat, beforecordx, 0.0);
+        assertEquals(saab.point.x, beforecordy + saab.currentSpeed, 0.0);
+        assertEquals(saab.point.y, beforecordx, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.point.x;
+        beforecordy = saab.point.y;
         saab.direction = 180;
         saab.move();
-        assertEquals(saab.xkoordinat, beforecordx - saab.currentSpeed, 0.0);
-        assertEquals(saab.ykoordinat, beforecordy, 0.0);
+        assertEquals(saab.point.x, beforecordx - saab.currentSpeed, 0.0);
+        assertEquals(saab.point.y, beforecordy, 0.0);
 
-        beforecordx = saab.xkoordinat;
-        beforecordy = saab.ykoordinat;
+        beforecordx = saab.point.x;
+        beforecordy = saab.point.y;
         saab.direction = 270;
         saab.move();
-        assertEquals(saab.ykoordinat, beforecordy - saab.currentSpeed, 0.0);
-        assertEquals(saab.xkoordinat, beforecordx, 0.0);
+        assertEquals(saab.point.y, beforecordy - saab.currentSpeed, 0.0);
+        assertEquals(saab.point.x, beforecordx, 0.0);
     }
 
     @Test
@@ -245,7 +245,7 @@ public class TestCar {
         carTransport.addCar(volvo2);
         assertEquals(carTransport.getNrOfCars(), 1, 0);
         carTransport.removeCar();
-        assertEquals(volvo2.xkoordinat, carTransport.xkoordinat + 1, 0);
+        assertEquals(volvo2.point.x, carTransport.point.x + 1, 0);
     }
 
     @Test
@@ -264,7 +264,7 @@ public class TestCar {
         assertEquals(volvo2.x, carTransport.x, 0);
         carTransport.turnRight();
         carTransport.move();
-        assertEquals(volvo2.ykoordinat, carTransport.ykoordinat, 0);
+        assertEquals(volvo2.point.y, carTransport.point.y, 0);
         carTransport.turnRight();
         carTransport.move();
         carTransport.turnRight();
@@ -272,8 +272,8 @@ public class TestCar {
         carTransport.brake(1);
         carTransport.openCargo();
         carTransport.removeCar();
-        assertEquals(volvo2.xkoordinat, carTransport.xkoordinat + 1, 0);
-        assertEquals(volvo2.ykoordinat, carTransport.ykoordinat + 1, 0);
+        assertEquals(volvo2.point.x, carTransport.point.x + 1, 0);
+        assertEquals(volvo2.point.y, carTransport.point.y + 1, 0);
     }
 
     // Test CarWorkshop
