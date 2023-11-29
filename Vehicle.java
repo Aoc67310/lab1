@@ -19,7 +19,6 @@ public abstract class Vehicle implements Movable{
 
     protected int direction;
 
-
     public Vehicle(int nrDoors ,double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;

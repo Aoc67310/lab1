@@ -55,8 +55,6 @@ public class CarView extends JFrame{
 
         this.add(drawPanel);
 
-
-
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
@@ -108,6 +106,22 @@ public class CarView extends JFrame{
             }
         });
 
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { carC.brake(gasAmount);
+            }
+        });
+
+        /*
+        private void Checkcarcollision() {
+            double carx = drawPanel.carPoint.getX();
+            double cary = drawPanel.carPoint.getY();
+            if (carx < 0.0 || carx > 800 || cary < 0.0 || cary > 800){
+                carC.turnright();
+                carC.turnright();
+            }
+        }
+         */
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 

@@ -30,6 +30,8 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Saab95());
+        cc.cars.add(new Scania());
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -43,10 +45,14 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
+            for (Vehicle vehicle : cars) {
+                vehicle.move();
+                if ( vehicle.getX() > 700.0 || vehicle.getX() < 0.0){
+                    vehicle.turnRight();
+                    vehicle.turnRight();
+                }
+                int x = (int) Math.round(vehicle.getX());
+                int y = (int) Math.round(vehicle.getY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -57,9 +63,23 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars
+        for (Vehicle vehicle : cars
                 ) {
-            car.gas(gas);
+            vehicle.gas(gas);
+        }
+    }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Vehicle vehicle : cars
+                ) {
+            vehicle.brake(brake);
+        }
+    }
+
+    void turnright(){
+        for (Vehicle vehicle : cars){
+            vehicle.turnRight();
         }
     }
 }
