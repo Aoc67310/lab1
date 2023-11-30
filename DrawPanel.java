@@ -17,15 +17,11 @@ public class DrawPanel extends JPanel{
     ArrayList<BufferedImage> images = new ArrayList<>(3);
 
     // Added: an array of points that makes it possible to track and print their positions
-    ArrayList<Point> points = new ArrayList<>(3);
-
-    public void setPoints(ArrayList<Point> points) {
-        this.points = points;
-    }
+    private ArrayList<Point> points = new ArrayList<>(3);
 
     // TODO: Make this genereal for all cars
     // Added: Generalizes for each car added in cc.cars (CarController)
-    void moveit(ArrayList<Vehicle> CARS){
+    public void moveit(ArrayList<Vehicle> CARS){
         for ( int i = 0;i < CARS.size(); i++){
             points.add(i, CARS.get(i).point);
         }

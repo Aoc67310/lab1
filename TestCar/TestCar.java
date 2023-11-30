@@ -250,8 +250,8 @@ public class TestCar {
 
     @Test
     public void Testdecrementcargoangleandincrementcargoangle() {
-        carTransport.decreaseCargoAngle(1);
-        carTransport.increaseCargoAngle(1);
+        carTransport.openGate();
+        carTransport.closeGate();
     }
 
     @Test
@@ -261,7 +261,7 @@ public class TestCar {
         carTransport.closeGate();
         carTransport.gas(1);
         carTransport.move();
-        assertEquals(volvo2.x, carTransport.x, 0);
+        assertEquals(volvo2.point.x, carTransport.point.x, 0);
         carTransport.turnRight();
         carTransport.move();
         assertEquals(volvo2.point.y, carTransport.point.y, 0);

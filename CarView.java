@@ -59,7 +59,7 @@ public class CarView extends JFrame{
                 new SpinnerNumberModel(0, //initial value
                         0, //min
                         100, //max
-                        1);//step
+                        1); //step
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -103,7 +103,6 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.gas(gasAmount);
-                //carC.Checkcarcollision();
             }
 
         });
@@ -155,20 +154,6 @@ public class CarView extends JFrame{
                 carC.stop();
             }
         });
-
-
-
-
-        /*
-        private void Checkcarcollision() {
-            double carx = drawPanel.carPoint.getX();
-            double cary = drawPanel.carPoint.getY();
-            if (carx < 0.0 || carx > 800 || cary < 0.0 || cary > 800){
-                carC.turnright();
-                carC.turnright();
-            }
-        }
-         */
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

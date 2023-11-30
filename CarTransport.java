@@ -71,6 +71,14 @@ public class CarTransport extends Truck {
     }
 
     @Override
+    public void gas(double amount){
+        if (!gateOpen) {
+            currentSpeed = Math.min(currentSpeed + amount, enginePower);
+        } else {System.out.println(" Cargogate is not closed");}
+
+    }
+
+    @Override
     public void move(){
         double speed = getCurrentSpeed();
         switch (direction){

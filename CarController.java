@@ -24,11 +24,6 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
 
-
-    //private CarView CarView;
-    //private DrawPanel DrawPanel;
-
-
     //methods:
 
     public static void main(String[] args) {
