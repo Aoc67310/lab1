@@ -30,8 +30,11 @@ public abstract class Vehicle implements Movable{
         this.point = point;
     } // constructor
 
+    public void setPoint(int x, int y){
+        point = new Point(x,y);
+    }
 
-    public Point getPoint() {return point; }
+    public Point getPoint() {return point;}
     public String getModelName() {
         return modelName;
     }
@@ -48,7 +51,7 @@ public abstract class Vehicle implements Movable{
         if (0 < currentSpeed && currentSpeed < enginePower) {
             return currentSpeed;
         }
-        return 0;
+        return 0.0;
     }
 
     public Color getColor(){

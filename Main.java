@@ -9,7 +9,7 @@ class Main {
         Saab95 saab = new Saab95();
         Volvo240 volvo = new Volvo240();
 
-
+        /*
         // Increase cargo angle, open cargo gate
         newTransport.increaseCargoAngle(20);
         newTransport.openCargo();
@@ -51,6 +51,10 @@ class Main {
         newTransport.addCar(saab);
         newTransport.addCar(volvo);
         System.out.println(newTransport.carStack);
+        */
+
+        saab.setPoint(5,7);
+        System.out.println(saab.point);
 
     }
 }

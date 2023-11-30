@@ -1,3 +1,5 @@
+import org.junit.runner.manipulation.Ordering;
+
 import java.awt.*;
 import java.util.Stack;
 import java.lang.Math;
@@ -6,6 +8,8 @@ public class CarTransport extends Truck {
 
     protected int nrOfCars;
 
+    boolean gateOpen;
+
     protected Stack<Car> carStack = new Stack<>();
 
     protected CarTransport() {super(2, 400, Color.black, "Cartransport");} //constructor
@@ -13,7 +17,6 @@ public class CarTransport extends Truck {
     protected int getNrOfCars() {
         return nrOfCars;
     }
-
 
     public Stack<Car> getCargo(){
         return carStack;
@@ -26,16 +29,19 @@ public class CarTransport extends Truck {
         } else {return 0.0;}
     }
 
-    public void openCargo(){
-        if (getCurrentSpeed() == 0) {cargoAngle = 70;}
+    public void openGate(){
+        if ( currentSpeed == 0.0) {
+            gateOpen = true;
+        }
     }
-
-    public void closeCargo(){
-        cargoAngle = 0;
+    public void closeGate(){
+        if (currentSpeed == 0.0){
+            gateOpen = false;
+        }
     }
 
     public void addCar(Car car) {
-        if (getCargoAngle() == 1.0) {
+        if (gateOpen) {
             carStack.push(car);
             nrOfCars++;
             System.out.println(car.getModelName() + " added to the car transport.");
@@ -45,7 +51,7 @@ public class CarTransport extends Truck {
     }
 
     public void removeCar() {
-        if (getCargoAngle() == 1.0) {
+        if (gateOpen) {
             if (!carStack.isEmpty()) {
                 carStack.get(carStack.size() - 1 ).point.x = point.x + 1;
                 carStack.pop().point.y = point.y + 1;
@@ -58,15 +64,6 @@ public class CarTransport extends Truck {
         }
     }
 
-    @Override
-    public void increaseCargoAngle(double amount){
-        System.out.println("You can only open the cargo gate fully with openCargo ");
-    }
-
-    @Override
-    public void  decreaseCargoAngle(double amount){
-        System.out.println("Wou can only close the cargo gate fully with closeCargo ");
-    }
 
     @Override
     public double speedFactor(){

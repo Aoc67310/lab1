@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.zip.DeflaterInputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,14 +12,24 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    BufferedImage carImage;
-    // To keep track of a singel cars position
-    Point carPoint = new Point();
+    // Added: an array of BufferdImmages to generalise and make adding an image to an object easier and
+    // more compact.
+    ArrayList<BufferedImage> images = new ArrayList<>(3);
+
+    // Added: an array of points that makes it possible to track and print their positions
+    ArrayList<Point> points = new ArrayList<>(3);
+
+    public void setPoints(ArrayList<Point> points) {
+        this.points = points;
+    }
 
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        carPoint.x = x;
-        carPoint.y = y;
+    // Added: Generalizes for each car added in cc.cars (CarController)
+    void moveit(ArrayList<Vehicle> CARS){
+        for ( int i = 0;i < CARS.size(); i++){
+            points.add(i, CARS.get(i).point);
+        }
+        //carPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -33,7 +45,14 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in Intelli
-            carImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+
+
+            // Added: Add a new photo of a car as needed
+            images.add(0,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+            images.add(1,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+            images.add(2,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+
+
         } catch (IOException ex)
         {
             ex.printStackTrace();
@@ -46,7 +65,13 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(carImage, carPoint.x, carPoint.y, null);
-        g.drawImage(carImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
+
+        // Added: Draws each car with their respected image and position
+        for( int i = 0; i < images.size(); i++){
+            g.drawImage(images.get(i),
+                    points.get(i).x, points.get(i).y, null );
+                    System.out.println(points.get(i).x);
+        }
+        //g.drawImage(carImage0, carPoint.x, carPoint.y, null); // Original code
     }
 }

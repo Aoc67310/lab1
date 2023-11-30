@@ -232,16 +232,16 @@ public class TestCar {
 
     @Test
     public void Testopenandclosecacrgo() {
-        carTransport.openCargo();
-        assertEquals(carTransport.getCargoAngle(), 1, 0);
-        carTransport.closeCargo();
-        assertEquals(carTransport.getCargoAngle(), 0, 0);
+        carTransport.openGate();
+        assertTrue(carTransport.gateOpen);
+        carTransport.closeGate();
+        assertFalse(carTransport.gateOpen);
     }
 
     @Test
     public void TestCarTransportgetNrOfCars_load_and_unload() {
         assertEquals(carTransport.getNrOfCars(), 0, 0);
-        carTransport.openCargo();
+        carTransport.openGate();
         carTransport.addCar(volvo2);
         assertEquals(carTransport.getNrOfCars(), 1, 0);
         carTransport.removeCar();
@@ -256,9 +256,9 @@ public class TestCar {
 
     @Test
     public void Testmove() {
-        carTransport.openCargo();
+        carTransport.openGate();
         carTransport.addCar(volvo2);
-        carTransport.closeCargo();
+        carTransport.closeGate();
         carTransport.gas(1);
         carTransport.move();
         assertEquals(volvo2.x, carTransport.x, 0);
@@ -270,7 +270,7 @@ public class TestCar {
         carTransport.turnRight();
         carTransport.move();
         carTransport.brake(1);
-        carTransport.openCargo();
+        carTransport.openGate();
         carTransport.removeCar();
         assertEquals(volvo2.point.x, carTransport.point.x + 1, 0);
         assertEquals(volvo2.point.y, carTransport.point.y + 1, 0);
