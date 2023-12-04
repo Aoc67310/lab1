@@ -48,7 +48,6 @@ public class DrawPanel extends JPanel{
             images.add(1,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
             images.add(2,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
 
-
         } catch (IOException ex)
         {
             ex.printStackTrace();

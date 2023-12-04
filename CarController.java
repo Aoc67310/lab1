@@ -61,7 +61,6 @@ public class CarController {
                     vehicle.turnRight();
                     vehicle.turnRight();
                 }
-
                 // Sends an ArrayList of all the vehicles to the DrawPanel
                 frame.drawPanel.moveit(cars);
                 // repaint() calls the paintComponent method of the panel

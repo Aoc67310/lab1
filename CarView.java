@@ -28,7 +28,6 @@ public class CarView extends JFrame{
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
-
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -38,13 +37,11 @@ public class CarView extends JFrame{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
-
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
         initComponents(framename);
     }
-
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
@@ -101,8 +98,7 @@ public class CarView extends JFrame{
         // TODO: Create more for each component as necessary
         gasButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+            public void actionPerformed(ActionEvent e) {carC.gas(gasAmount);
             }
 
         });
