@@ -25,7 +25,6 @@ public class DrawPanel extends JPanel{
         for ( int i = 0;i < CARS.size(); i++){
             points.add(i, CARS.get(i).point);
         }
-        //carPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -41,7 +40,6 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in Intelli
-
 
             // Added: Add a new photo of a car as needed
             images.add(0,ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
@@ -65,7 +63,6 @@ public class DrawPanel extends JPanel{
         for( int i = 0; i < images.size(); i++){
             g.drawImage(images.get(i),
                     points.get(i).x, points.get(i).y, null );
-                    System.out.println(points.get(i).x);
         }
         //g.drawImage(carImage0, carPoint.x, carPoint.y, null); // Original code
     }

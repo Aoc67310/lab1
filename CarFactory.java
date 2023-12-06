@@ -2,12 +2,8 @@ import java.awt.*;
 
 public class CarFactory {
 
-    public Car createSaab95(){
-
-        Car car = new Saab95() {
-        };
-        return car;
-
+    public Car createSaab95() {
+        return new Saab95();
     }
 
     public Car createVolvo240(){

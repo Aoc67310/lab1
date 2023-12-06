@@ -17,7 +17,8 @@ public class CarApp {
         cc.frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
-        cc.timer.start();
     }
+
+
 }
 
