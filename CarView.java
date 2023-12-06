@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class CarView extends ButtonFactory{
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -29,7 +29,6 @@ public class CarView extends JFrame{
     int gasAmount = 0;
 
     // Buttons / Labels
-
     JLabel gasLabel = bf.CreateJLabel("Amount of gas");
     JButton gasButton = bf.CreateButton("gas");
     JButton brakeButton = bf.CreateButton("Brake");
@@ -39,6 +38,10 @@ public class CarView extends JFrame{
     JButton lowerBedButton = bf.CreateButton("Lower Lift Bed");
     JButton startButton = bf.CreateButton("Start all cars");
     JButton stopButton = bf.CreateButton("Stop all cars");
+    JButton addCar = bf.CreateButton("Add car");
+    JButton removeCar = bf.CreateButton("Remove Car");
+
+
 
     // Constructor
     public CarView(String framename, CarController cc){
