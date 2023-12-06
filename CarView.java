@@ -17,26 +17,29 @@ public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
+    ButtonFactory bf = new ButtonFactory();
+
+
     // The controller member
     CarController carC;
-
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
-
     JPanel controlPanel = new JPanel();
-
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
-    JLabel gasLabel = new JLabel("Amount of gas");
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    // Buttons / Labels
+
+    JLabel gasLabel = bf.CreateJLabel("Amount of gas");
+    JButton gasButton = bf.CreateButton("gas");
+    JButton brakeButton = bf.CreateButton("Brake");
+    JButton turboOnButton = bf.CreateButton("Saab Turbo on");
+    JButton turboOffButton = bf.CreateButton("Saab Turbo Off");
+    JButton liftBedButton = bf.CreateButton("Scania Lift Bed");
+    JButton lowerBedButton = bf.CreateButton("Lower Lift Bed");
+    JButton startButton = bf.CreateButton("Start all cars");
+    JButton stopButton = bf.CreateButton("Stop all cars");
+
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
