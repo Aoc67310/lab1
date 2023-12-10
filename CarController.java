@@ -20,7 +20,6 @@ public class CarController {
     // each step between delays.
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
     // A list of cars, modify if needed
     Carmodel cm = new Carmodel();
 
