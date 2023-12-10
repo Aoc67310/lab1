@@ -22,12 +22,7 @@ public class CarTransport extends Truck {
         return carStack;
     }
     // 1 represents an open cargo gate, 0 represents a closed cargo gate.
-    @Override
-    public double getCargoAngle(){
-        if (cargoAngle == 70){
-            return 1.0;
-        } else {return 0.0;}
-    }
+
 
     public void openGate(){
         if ( currentSpeed == 0.0) {
