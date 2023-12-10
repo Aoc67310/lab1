@@ -22,19 +22,28 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Vehicle> carsDP = new ArrayList<>(3);
 
+
+
     public void uppdatecarlist(ArrayList<Vehicle> CARS) {
         carsDP = CARS;
     }
     // TODO: Make this genereal for all cars
     // Added: Generalizes for each car added in cc.cars (CarController)
     public void moveit(){
+        if (points.size() > carsDP.size()){
+            points.remove(points.size() -1 );
+
+        }
+
         if (carsDP.size() == (points.size() + 1)) {
             points.add(carsDP.size()- 1, new Point(carsDP.get(carsDP.size() - 1).point.x, points.get(points.size() - 1).y + 50 ));
             carsDP.get(carsDP.size()- 1).point = new Point(carsDP.get(carsDP.size() - 1).point.x, points.get(points.size() - 1).y );
+
         } else if (carsDP.size() > points.size()) {
             for (int i = 0; (carsDP.size() != points.size()); i++) {
                 points.add(i, carsDP.get(i).point);
             }
+
         }else if (carsDP.size() == points.size()) {
             for (int i = 0; i < carsDP.size(); i++) {
                 points.set(i, carsDP.get(i).point);
@@ -47,7 +56,7 @@ public class DrawPanel extends JPanel{
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.CYAN);
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and

@@ -88,11 +88,11 @@ public class CarView extends ButtonFactory{
         controlPanel.add(removeCar, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
+        controlPanel.setBackground(Color.white);
 
 
         startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
+        startButton.setForeground(Color.black);
         startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
 
