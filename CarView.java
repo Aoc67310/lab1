@@ -108,7 +108,6 @@ public class CarView extends ButtonFactory{
             @Override
             public void actionPerformed(ActionEvent e) {carC.gas(gasAmount);
             }
-
         });
 
         brakeButton.addActionListener(new ActionListener() {
