@@ -34,8 +34,9 @@ public class DrawPanel extends JPanel{
             points.remove(points.size() -1 );
 
         }
-
-        if (carsDP.size() == (points.size() + 1)) {
+        System.out.println(carsDP.size());
+        System.out.println(points.size());
+        if (carsDP.size() == (points.size() + 1) && points.size() > 0) {
             points.add(carsDP.size()- 1, new Point(carsDP.get(carsDP.size() - 1).point.x, points.get(points.size() - 1).y + 50 ));
             carsDP.get(carsDP.size()- 1).point = new Point(carsDP.get(carsDP.size() - 1).point.x, points.get(points.size() - 1).y );
 
