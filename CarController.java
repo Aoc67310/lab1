@@ -1,72 +1,104 @@
-import javax.sql.rowset.CachedRowSet;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-/*
- * This class represents the Controller part in the MVC pattern.
- * It's responsibilities is to listen to the View and responds in a appropriate manner by
- * modifying the model state and the updating the view.
- */
 
 public class CarController {
-    // member fields:
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
+    Carmodel cm;
+    CarView cw;
 
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
+    int gasAmount = 0;
 
-    // The frame that represents this instance View of the MVC pattern
-    // A list of cars, modify if needed
-    Carmodel cm = new Carmodel();
+    public CarController(CarView cw, Carmodel cm) {
+        this.cw = cw;
+        this.cm = cm;
 
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-
-        cm.gas(amount);
+        initListeners();
     }
 
-    void brake(int amount) {
-        cm.brake(amount);
-    }
+    private void initListeners() {
 
-    void setTurboOn() {
-        cm.setTurboOn();
-    }
 
-    void setTurboOf(){
-        cm.setTurboOf();
-    }
+        cw.gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
+            }
+        });
 
-    void liftBed(double amount){
-        cm.liftBed(amount);
-    }
+        cw.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.gas(gasAmount);
+            }
+        });
 
-    void lowerBed(double amount){
-        cm.lowerBed(amount);
-    }
-    void start(){
-        cm.start();
-    }
-    void stop(){
-        cm.stop();
-    }
+        cw.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.brake(gasAmount);
+            }
 
-    void addCar() {
-        cm.addCar();
-    }
+        });
+        cw.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.brake(gasAmount);
+            }
+        });
 
-    void removeCar() {
-        cm.removeCar();
-    }
+        cw.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.brake(gasAmount);
+            }
+        });
 
+
+        cw.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.brake(gasAmount);
+            }
+        });
+
+        cw.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.lowerBed(gasAmount);
+            }
+        });
+
+        cw.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.start();
+            }
+        });
+
+        cw.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.stop();
+            }
+        });
+
+        cw.addCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.addCar();
+            }
+        });
+
+        cw.removeCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cm.removeCar();
+            }
+        });
+
+    }
 }
 

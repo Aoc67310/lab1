@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 public class CarApp {
 
     private CarController cc;
-    private CarView frame;
-    private Timer timer;
+    private CarView cw;
+    final int delay = 50;
+    private Timer timer = new Timer(delay, new TimerListener());
+    private Carmodel cm;
 
     public CarApp(){
-        cc = new CarController();
-        frame = new CarView("CarSim 1.0",cc);
-
-        final int delay = 50;
-        timer = new Timer(delay, new TimerListener());
+        cw = new CarView();
+        cm = new Carmodel();
+        cc = new CarController(cw, cm);
 
         cc.cm.createcars();
         timer.start();
@@ -24,10 +24,10 @@ public class CarApp {
         public void actionPerformed(ActionEvent e) {
             cc.cm.Checkcollison();
             // Sends an ArrayList of all the vehicles to the DrawPanel
-            frame.drawPanel.uppdatecarlist(cc.cm.cars);
-            frame.drawPanel.moveit();
+            cw.drawPanel.uppdatecarlist(cc.cm.cars);
+            cw.drawPanel.moveit();
             // repaint() calls the paintComponent method of the panel
-            frame.drawPanel.repaint();
+            cw.drawPanel.repaint();
         }
     }
 
@@ -35,14 +35,7 @@ public class CarApp {
         SwingUtilities.invokeLater(() -> {
             new CarApp();
                 });
-        // Instance of this class
 
-        // Added: Add a new vehicle to the arraylist cars
-        // Added: every new vehicle added has their y coordinate shifted by 100
-
-        // Start a new view and send a reference of self
-
-        // Start the timer
     }
 
 
