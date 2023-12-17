@@ -10,7 +10,7 @@ public class CarController{
 
     private final Carmodel carModel;
     private final CarView carView;
-    private final int gasAmount = 0;
+    private int gasAmount;
 
     public CarController(Carmodel cm, CarView frame) {
         this.carModel = cm;
@@ -19,6 +19,19 @@ public class CarController{
     }
 
     private void initListeners() {
+
+        carView.gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
+       carView.gasButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) { carModel.gas(gasAmount);
+
+           }
+       });
        carView.brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { carModel.brake(gasAmount);

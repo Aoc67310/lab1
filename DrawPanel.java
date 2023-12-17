@@ -30,6 +30,7 @@ public class DrawPanel extends JPanel{
     // TODO: Make this genereal for all cars
     // Added: Generalizes for each car added in cc.cars (CarController)
     public void moveit(){
+        System.out.println("move");
         if (points.size() > carsDP.size()){
             points.remove(points.size() -1 );
 

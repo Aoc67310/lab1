@@ -2,9 +2,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -14,7 +13,7 @@ import java.util.ArrayList;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends ButtonFactory implements Observer{
+public class CarView extends ButtonFactory implements Observer {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -65,11 +64,7 @@ public class CarView extends ButtonFactory implements Observer{
                         100, //max
                         1); //step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
+
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -119,8 +114,12 @@ public class CarView extends ButtonFactory implements Observer{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
     @Override
-    public void uppdate(ArrayList<Vehicle> cars) {
+    public void update(ArrayList<Vehicle> cars) {
         drawPanel.uppdatecarlist(cars);
+        drawPanel.moveit();
+        drawPanel.repaint();
+        System.out.println(cars);
     }
 }

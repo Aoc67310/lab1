@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.awt.*;
 import java.util.Collection;
-import java.util.Observable;
-import java.util.Observer;
+
+
 
 public class Carmodel {
 
@@ -26,9 +26,10 @@ public class Carmodel {
     public void notifyObservers(){
         for (Observer observer: observers)
         {
-            observer.update((Observable) observer, cars);
+            observer.update(cars);
         }
     }
+
 
     public void Checkcollison() {
         for (Vehicle vehicle : cars) {
@@ -41,6 +42,8 @@ public class Carmodel {
             }
         }
     }
+
+
 
     public void gas(int amount) {
         double gas = ((double) amount) / 100;

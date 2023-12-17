@@ -32,10 +32,15 @@ public class CarApp {
         public void actionPerformed(ActionEvent e) {
             cm.Checkcollison();
             // Sends an ArrayList of all the vehicles to the DrawPanel
+            /*
             frame.drawPanel.uppdatecarlist(cm.cars);
             frame.drawPanel.moveit();
             // repaint() calls the paintComponent method of the panel
             frame.drawPanel.repaint();
+
+             */
+            
+            cm.notifyObservers();
         }
     }
 
