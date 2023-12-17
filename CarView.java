@@ -120,6 +120,5 @@ public class CarView extends ButtonFactory implements Observer {
         drawPanel.uppdatecarlist(cars);
         drawPanel.moveit();
         drawPanel.repaint();
-        System.out.println(cars);
     }
 }
