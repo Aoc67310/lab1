@@ -96,39 +96,5 @@ public class CarController{
 
     }
 
-    void brake(int amount) {
-        cm.brake(amount);
-    }
-
-    void setTurboOn() {
-        cm.setTurboOn();
-    }
-
-    void setTurboOf(){
-        cm.setTurboOf();
-    }
-
-    void liftBed(double amount){
-        cm.liftBed(amount);
-    }
-
-    void lowerBed(double amount){
-        cm.lowerBed(amount);
-    }
-    void start(){
-        cm.start();
-    }
-    void stop(){
-        cm.stop();
-    }
-
-    void addCar() {
-        cm.addCar();
-    }
-
-    void removeCar() {
-        cm.removeCar();
-    }
-
 }
 

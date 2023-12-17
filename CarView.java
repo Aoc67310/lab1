@@ -19,7 +19,7 @@ public class CarView extends ButtonFactory implements Observer {
 
     ButtonFactory bf = new ButtonFactory();
 
-
+    CarController carC;
     // The controller member
     DrawPanel drawPanel = new DrawPanel(X, Y-240);
     JPanel controlPanel = new JPanel();
