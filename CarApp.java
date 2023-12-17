@@ -6,25 +6,33 @@ import java.awt.event.ActionListener;
 public class CarApp {
 
     private CarController cc;
+    private Carmodel cm;
     private CarView frame;
     private Timer timer;
 
     public CarApp(){
-        cc = new CarController();
+        final int delay = 50;
+
+        cm = new Carmodel();
+
         frame = new CarView("CarSim 1.0",cc);
 
-        final int delay = 50;
+        cc = new CarController(cm,frame);
+
         timer = new Timer(delay, new TimerListener());
 
-        cc.cm.createcars();
+        cm.createcars();
+
+        cm.addobserver(frame);
+
         timer.start();
     }
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            cc.cm.Checkcollison();
+            cm.Checkcollison();
             // Sends an ArrayList of all the vehicles to the DrawPanel
-            frame.drawPanel.uppdatecarlist(cc.cm.cars);
+            frame.drawPanel.uppdatecarlist(cm.cars);
             frame.drawPanel.moveit();
             // repaint() calls the paintComponent method of the panel
             frame.drawPanel.repaint();

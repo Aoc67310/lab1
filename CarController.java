@@ -1,37 +1,86 @@
-import javax.sql.rowset.CachedRowSet;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-/*
- * This class represents the Controller part in the MVC pattern.
- * It's responsibilities is to listen to the View and responds in a appropriate manner by
- * modifying the model state and the updating the view.
- */
+public class CarController{
 
-public class CarController {
-    // member fields:
+    private final Carmodel carModel;
+    private final CarView carView;
+    private final int gasAmount = 0;
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
+    public CarController(Carmodel cm, CarView frame) {
+        this.carModel = cm;
+        this.carView = frame;
+        initListeners();
+    }
 
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
+    private void initListeners() {
+       carView.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { carModel.brake(gasAmount);
+            }
+        });
 
-    // The frame that represents this instance View of the MVC pattern
-    // A list of cars, modify if needed
-    Carmodel cm = new Carmodel();
+        carView.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.setTurboOn();
+            }
+        });
 
+        carView.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.setTurboOf();
+            }
+        });
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
+        carView.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.liftBed(5);
+            }
+        });
 
-    // Calls the gas method for each car once
-    void gas(int amount) {
+        carView.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.lowerBed(5);
+            }
+        });
 
-        cm.gas(amount);
+        carView.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.start();
+            }
+        });
+
+        carView.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.stop();
+            }
+        });
+
+        carView.addCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.addCar();
+            }
+        });
+
+        carView.removeCar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carModel.removeCar();
+            }
+        });
+
     }
 
     void brake(int amount) {

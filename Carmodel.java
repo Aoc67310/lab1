@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
 
 public class Carmodel {
 
@@ -7,12 +10,23 @@ public class Carmodel {
 
     CarFactory cf = new CarFactory();
 
+    private  ArrayList<Observer> observers = new ArrayList<>();
+
     public void createcars() {
         cars.add(new Volvo240());
         cars.add(new Saab95());
         cars.add(new Scania());
         for (int i = 0; i < cars.size(); i++) {
             cars.get(i).setPoint(0, 50 * i);
+        }
+    }
+    public void addobserver(Observer observer){
+        observers.add(observer);
+    }
+    public void notifyObservers(){
+        for (Observer observer: observers)
+        {
+            observer.update((Observable) observer, cars);
         }
     }
 
@@ -74,6 +88,7 @@ public class Carmodel {
         for (Vehicle vehicle : cars) {
             if (vehicle instanceof Scania) {
                 ((Scania) vehicle).decreaseCargoAngle(amount);
+                System.out.println("hh");
             }
         }
     }
